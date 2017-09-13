@@ -14,14 +14,14 @@ import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 public class MainActivity extends BaseActivity {
-    public String url = "";
-    Request<String> request = null;
+    public String url = "http://ileshua.yeahka.com/lesk/login.html?hf=info";
+    private Request<String> request = null;
     @Override
     protected void onActivityCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         Button bt_1 = (Button)findViewById(R.id.bt_1);
 
-        request = NoHttp.createStringRequest(url, RequestMethod.GET);
+        request = NoHttp.createStringRequest(url, RequestMethod.POST);
         request.add("dSn", "122006010639");
         request.add("vId", "00100007");
         request.add("pSn", "H12160011060");
@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public void onFailed(int what, Response<String> response) {
-
+            showMessageDialog("请求失败: ",response.get());
         }
     };
 
