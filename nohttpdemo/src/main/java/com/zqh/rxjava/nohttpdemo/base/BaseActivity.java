@@ -1,4 +1,4 @@
-package com.zqh.rxjava.nohttpdemo;
+package com.zqh.rxjava.nohttpdemo.base;
 
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -10,6 +10,7 @@ import com.yanzhenjie.nohttp.Logger;
 import com.yanzhenjie.nohttp.NoHttp;
 import com.yanzhenjie.nohttp.rest.Request;
 import com.yanzhenjie.nohttp.rest.RequestQueue;
+import com.zqh.rxjava.nohttpdemo.R;
 import com.zqh.rxjava.nohttpdemo.dialog.ImageDialog;
 import com.zqh.rxjava.nohttpdemo.utils.HttpListener;
 import com.zqh.rxjava.nohttpdemo.utils.HttpResponseListener;
@@ -66,10 +67,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         // 和声明周期绑定，退出时取消这个队列中的所有请求，当然可以在你想取消的时候取消也可以，不一定和声明周期绑定。
         mQueue.cancelBySign(object);
-
         // 因为回调函数持有了activity，所以退出activity时请停止队列。
         mQueue.stop();
-
         super.onDestroy();
     }
 
