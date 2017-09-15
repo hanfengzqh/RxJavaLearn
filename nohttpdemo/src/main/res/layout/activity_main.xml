@@ -4,12 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.zqh.rxjava.nohttpdemo.MainActivity">
 
     <Button
         android:id="@+id/bt_1"
-        android:text="执行"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="执行" />
+
+    <TextView
+        android:id="@+id/textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 </LinearLayout>

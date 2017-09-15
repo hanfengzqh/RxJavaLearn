@@ -1,71 +1,107 @@
 package com.zqh.rxjava.nohttpdemo;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.yanzhenjie.nohttp.NoHttp;
 import com.yanzhenjie.nohttp.RequestMethod;
 import com.yanzhenjie.nohttp.rest.Request;
 import com.yanzhenjie.nohttp.rest.Response;
+import com.zqh.rxjava.nohttpdemo.base.BaseActivity;
+import com.zqh.rxjava.nohttpdemo.infor.JavaInfor;
+import com.zqh.rxjava.nohttpdemo.manager.RetrofitManager;
 import com.zqh.rxjava.nohttpdemo.utils.HttpListener;
 
-import java.text.SimpleDateFormat;
-import java.util.UUID;
+import retrofit2.Call;
+import retrofit2.Callback;
+
+import static com.zqh.rxjava.nohttpdemo.utils.Utils.getSystemTime;
+import static com.zqh.rxjava.nohttpdemo.utils.Utils.getUUID;
 
 public class MainActivity extends BaseActivity {
-    public String url = "http://ileshua.yeahka.com/lesk/login.html?hf=info";
+//    public String url = "http://mgmt.zhinengguo.com:38201/index.php?s=api/app/applist&";
+    public String url = "http://mgmt.zhinengguo.com:38201";
+
     private Request<String> request = null;
+    private TextView textView;
+
     @Override
     protected void onActivityCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
-        Button bt_1 = (Button)findViewById(R.id.bt_1);
+        Button bt_1 = (Button) findViewById(R.id.bt_1);
+        textView = (TextView) findViewById(R.id.textview);
 
         request = NoHttp.createStringRequest(url, RequestMethod.POST);
-        request.add("dSn", "122006010639");
-        request.add("vId", "00100007");
-        request.add("pSn", "H12160011060");
-        request.add("dT", "2");
-        request.add("dT", getUUID());
-        request.add("mT", "1");
-        request.add("sT", getSystemTime());
-        request.add("pN", "1");
-        request.add("pC", "10");
-        request.add("catalog", "1");
-
+        addRequestParams();
+        //方法一采用NoHttp方法
         bt_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                request(1, request, httpListener, true, true);
+//                request(1, request, httpListener, true, true);
+                RetrofitManager.getInstance(url).setRequestParams(url)
+                        .enqueue(new Callback<JavaInfor>() {
+                            @Override
+                            public void onResponse(Call<JavaInfor> call,
+                                                   retrofit2.Response<JavaInfor> response) {
+                                Log.d("zqh","请求成功"+response.toString());
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<JavaInfor> call, Throwable t) {
+                                Log.d("zqh","请求失败");
+                            }
+                        });
             }
         });
+
+        //方法二采用RxJava+Retrofit
+//        RetrofitManager.getInstance(url).setRequestParams()
+//                .enqueue(new Callback<JavaInfor>() {
+//            @Override
+//            public void onResponse(Call<JavaInfor> call,
+//                                   retrofit2.Response<JavaInfor> response) {
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JavaInfor> call, Throwable t) {
+//
+//            }
+//        });
+
     }
 
     private HttpListener<String> httpListener = new HttpListener<String>() {
         @Override
         public void onSucceed(int what, Response<String> response) {
-            showMessageDialog("请求成功: ",response.get());
+            showMessageDialog("请求成功: ", response.get());
+            textView.setText("请求成功: " + response.get());
         }
 
         @Override
         public void onFailed(int what, Response<String> response) {
-            showMessageDialog("请求失败: ",response.get());
+            showMessageDialog("请求失败: ", response.get());
         }
     };
 
-    public static String getUUID() {
-        String[] str = UUID.randomUUID().toString().split("-");
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < str.length; i++) {
-            sb.append(str[i]);
-        }
-        return sb.toString();
-    }
-
-    public static String getSystemTime() {
-        SimpleDateFormat systemDateFormat = new SimpleDateFormat(
-                "yyyyMMddHHmmss");
-        String systemDate = systemDateFormat.format(new java.util.Date());
-        return systemDate;
+    /**
+     * 添加请求参数
+     */
+    private void addRequestParams() {
+        request.add("dSn", "122006010639");
+        request.add("vId", "00100007");
+        request.add("pSn", "H12160011060");
+        request.add("dT", "2");
+        request.add("mId", getUUID());
+        request.add("mT", "1");
+        request.add("sT", getSystemTime());
+        request.add("pN", "1");
+        request.add("pC", "10");
+        request.add("catalog", "1");
     }
 }
