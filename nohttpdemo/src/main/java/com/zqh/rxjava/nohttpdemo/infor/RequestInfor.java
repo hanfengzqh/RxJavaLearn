@@ -1,10 +1,12 @@
 package com.zqh.rxjava.nohttpdemo.infor;
 
+import java.io.Serializable;
+
 /**
  * Created by zqh on 2017/9/14.
  */
 
-public class RequestInfor {
+public class RequestInfor implements Serializable{
 
     private String dSn;
     private String vId;
@@ -15,6 +17,23 @@ public class RequestInfor {
     private String sT;
     private String pN;
     private String pC;
+
+    @Override
+    public String toString() {
+        return "RequestInfor{" +
+                "dSn='" + dSn + '\'' +
+                ", vId='" + vId + '\'' +
+                ", pSn='" + pSn + '\'' +
+                ", dT='" + dT + '\'' +
+                ", mId='" + mId + '\'' +
+                ", mT='" + mT + '\'' +
+                ", sT='" + sT + '\'' +
+                ", pN='" + pN + '\'' +
+                ", pC='" + pC + '\'' +
+                ", catalog='" + catalog + '\'' +
+                '}';
+    }
+
     private String catalog;
 
     public String getdSn() {

@@ -1,53 +1,41 @@
 package com.zqh.rxjava.nohttpdemo.infor;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.LinkedList;
 
 @SuppressWarnings("serial")
 public class JavaInfor implements Serializable {
 
-    private int id;
-    public String softwareId;
-    public String softwareVendorId;
-    public String sPN;
-    public String sV;
-    public String sN;
-    public String sDC;
-    public String sP;
-    public String sI;
-    public String sIP;
-    public String sS;
-    public String sCom;
-    public String softwarescore;
-    public String commentcount;
-    public String likecount;
-    public String recommend;
-    public String totalscore;
-    public String installTime;
-    public List<String> imgs;
-    public long progressBar;
-    public int state;
-    public long tvDownLoadSize;
-    public String sTy;
-    public String fileSavePath;
-    private boolean autoResume;
-    private boolean autoRename;
-    public String sC;
+    String app_status;
+    String softwareId;
+    String version;
+    String softwareVendorId;
+    String sPN;
+    String sV;
+    String sN;
+    String sDC;
+    String sP;
+    String sI;
+    String sIP;
+    String sS;
+    String sCom;
+    LinkedList<String> imgs;
+    String sTy;
+    String downloadcount;
+    String softwarescore;
+    String commentcount;
+    String likecount;
+    String recommend;
+    String totalscore;
+    String softwareUploadTime;
+    String sC;
 
-    public void setsC(String sC) {
-        this.sC = sC;
+    public String getApp_status() {
+        return app_status;
     }
 
-    public String getsC() {
-        return sC;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setApp_status(String app_status) {
+        this.app_status = app_status;
     }
 
     public String getSoftwareId() {
@@ -56,6 +44,14 @@ public class JavaInfor implements Serializable {
 
     public void setSoftwareId(String softwareId) {
         this.softwareId = softwareId;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public String getSoftwareVendorId() {
@@ -138,6 +134,30 @@ public class JavaInfor implements Serializable {
         this.sCom = sCom;
     }
 
+    public LinkedList<String> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(LinkedList<String> imgs) {
+        this.imgs = imgs;
+    }
+
+    public String getsTy() {
+        return sTy;
+    }
+
+    public void setsTy(String sTy) {
+        this.sTy = sTy;
+    }
+
+    public String getDownloadcount() {
+        return downloadcount;
+    }
+
+    public void setDownloadcount(String downloadcount) {
+        this.downloadcount = downloadcount;
+    }
+
     public String getSoftwarescore() {
         return softwarescore;
     }
@@ -178,93 +198,19 @@ public class JavaInfor implements Serializable {
         this.totalscore = totalscore;
     }
 
-    public String getInstallTime() {
-        return installTime;
+    public String getSoftwareUploadTime() {
+        return softwareUploadTime;
     }
 
-    public void setInstallTime(String installTime) {
-        this.installTime = installTime;
+    public void setSoftwareUploadTime(String softwareUploadTime) {
+        this.softwareUploadTime = softwareUploadTime;
     }
 
-    public List<String> getImgs() {
-        return imgs;
+    public String getsC() {
+        return sC;
     }
 
-    public void setImgs(List<String> imgs) {
-        this.imgs = imgs;
+    public void setsC(String sC) {
+        this.sC = sC;
     }
-
-    public long getProgressBar() {
-        return progressBar;
-    }
-
-    public void setProgressBar(long progressBar) {
-        this.progressBar = progressBar;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
-    public long getTvDownLoadSize() {
-        return tvDownLoadSize;
-    }
-
-    public void setTvDownLoadSize(long tvDownLoadSize) {
-        this.tvDownLoadSize = tvDownLoadSize;
-    }
-
-    public String getsTy() {
-        return sTy;
-    }
-
-    public void setsTy(String sTy) {
-        this.sTy = sTy;
-    }
-
-
-    public String getFileSavePath() {
-        return fileSavePath;
-    }
-
-    public void setFileSavePath(String fileSavePath) {
-        this.fileSavePath = fileSavePath;
-    }
-
-    public boolean isAutoResume() {
-        return autoResume;
-    }
-
-    public void setAutoResume(boolean autoResume) {
-        this.autoResume = autoResume;
-    }
-
-    public boolean isAutoRename() {
-        return autoRename;
-    }
-
-    public void setAutoRename(boolean autoRename) {
-        this.autoRename = autoRename;
-    }
-
-    @Override
-    public String toString() {
-        return "SSLlist [id=" + id + ", softwareId=" + softwareId
-                + ", softwareVendorId=" + softwareVendorId + ", sPN=" + sPN
-                + ", sV=" + sV + ", sN=" + sN + ", sDC=" + sDC + ", sP=" + sP
-                + ", sI=" + sI + ", sIP=" + sIP + ", sS=" + sS + ", sCom="
-                + sCom + ", softwarescore=" + softwarescore + ", commentcount="
-                + commentcount + ", likecount=" + likecount + ", recommend="
-                + recommend + ", totalscore=" + totalscore + ", installTime="
-                + installTime + ", imgs=" + imgs + ", progressBar="
-                + progressBar + ", state=" + state + ", tvDownLoadSize="
-                + tvDownLoadSize + ", sTy=" + sTy
-                + ", fileSavePath=" + fileSavePath + ", autoResume="
-                + autoResume + ", autoRename=" + autoRename + "]";
-    }
-
 }

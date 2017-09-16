@@ -6,12 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.yanzhenjie.nohttp.NoHttp;
 import com.yanzhenjie.nohttp.RequestMethod;
 import com.yanzhenjie.nohttp.rest.Request;
 import com.yanzhenjie.nohttp.rest.Response;
 import com.zqh.rxjava.nohttpdemo.base.BaseActivity;
-import com.zqh.rxjava.nohttpdemo.infor.JavaInfor;
+import com.zqh.rxjava.nohttpdemo.infor.SuccessResult;
 import com.zqh.rxjava.nohttpdemo.manager.RetrofitManager;
 import com.zqh.rxjava.nohttpdemo.utils.HttpListener;
 
@@ -31,9 +32,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onActivityCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
+
         Button bt_1 = (Button) findViewById(R.id.bt_1);
         textView = (TextView) findViewById(R.id.textview);
-
         request = NoHttp.createStringRequest(url, RequestMethod.POST);
         addRequestParams();
         //方法一采用NoHttp方法
@@ -41,18 +42,19 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 //                request(1, request, httpListener, true, true);
-                RetrofitManager.getInstance(url).setRequestParams(url)
-                        .enqueue(new Callback<JavaInfor>() {
+                RetrofitManager.getInstance(url).setRequestParams()
+                        .enqueue(new Callback<SuccessResult>() {
                             @Override
-                            public void onResponse(Call<JavaInfor> call,
-                                                   retrofit2.Response<JavaInfor> response) {
-                                Log.d("zqh","请求成功"+response.toString());
+                            public void onResponse(Call<SuccessResult> call,
+                                                   retrofit2.Response<SuccessResult> response) {
+//                                Log.d("zqh","请求成功"+response.toString());
+                                Logger.d("请求成功"+response.body());
 
                             }
 
                             @Override
-                            public void onFailure(Call<JavaInfor> call, Throwable t) {
-                                Log.d("zqh","请求失败");
+                            public void onFailure(Call<SuccessResult> call, Throwable t) {
+                                Log.d("zqh","请求失败"+t.toString());
                             }
                         });
             }
@@ -81,6 +83,7 @@ public class MainActivity extends BaseActivity {
         public void onSucceed(int what, Response<String> response) {
             showMessageDialog("请求成功: ", response.get());
             textView.setText("请求成功: " + response.get());
+            Log.d("zqh","response.get() = "+response.get());
         }
 
         @Override
@@ -101,7 +104,7 @@ public class MainActivity extends BaseActivity {
         request.add("mT", "1");
         request.add("sT", getSystemTime());
         request.add("pN", "1");
-        request.add("pC", "10");
+        request.add("pC", "2");
         request.add("catalog", "1");
     }
 }
