@@ -60,22 +60,6 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        //方法二采用RxJava+Retrofit
-//        RetrofitManager.getInstance(url).setRequestParams()
-//                .enqueue(new Callback<JavaInfor>() {
-//            @Override
-//            public void onResponse(Call<JavaInfor> call,
-//                                   retrofit2.Response<JavaInfor> response) {
-//
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JavaInfor> call, Throwable t) {
-//
-//            }
-//        });
-
     }
 
     private HttpListener<String> httpListener = new HttpListener<String>() {
