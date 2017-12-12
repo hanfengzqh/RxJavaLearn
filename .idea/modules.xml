@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RxJavaLearn.iml" filepath="$PROJECT_DIR$/RxJavaLearn.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nohttpdemo/nohttpdemo.iml" filepath="$PROJECT_DIR$/nohttpdemo/nohttpdemo.iml" />
     </modules>
   </component>
 </project>
